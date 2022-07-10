@@ -26,6 +26,32 @@ void	my_mlx_pixel_put(t_buffer *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+/* Bresenham's line algorithm
+** https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#Line_equation
+** https://www.thecrazyprogrammer.com/2017/01/bresenhams-line-drawing-algorithm-c-c.html
+*/
+
+void	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color)
+{
+	int dx, dy, D, x,y;
+	dx = x_to - x_from;
+	dy = y_to - y_from;
+	D = 2*dy - dx;
+	y = y_from;
+	x = x_from;
+	while (x <= x_to)
+	{
+		my_mlx_pixel_put(data->dbl_buffer,x,y,color);
+		if (D > 0)
+		{
+			y ++;
+			D = D - 2 * dx;
+		}
+		D = D + 2 * dy;
+		x++;
+	}
+}
+
 void clear_img(t_data *data)
 {
 	int x,y;
