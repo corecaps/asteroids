@@ -20,7 +20,7 @@
 # include <string.h>
 # define SIZE_X 800
 # define SIZE_Y 600
-# define FRAME_MAX 500
+# define FRAME_MAX 10
 
 typedef struct s_buffer
 {
@@ -30,7 +30,6 @@ typedef struct s_buffer
 	int 	line_length;
 	int 	endian;
 } t_buffer;
-
 typedef struct	s_data
 {
 	int			size_x;
@@ -40,8 +39,9 @@ typedef struct	s_data
 	t_buffer	*dbl_buffer;
 } t_data;
 void	win_close(int keycode, t_data *data);
-int my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
+int		my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
 void 	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color);
-void	clear_img(t_data *data);
+void	clear_buffer(t_data *data);
 int 	render(t_data *data);
+void 	test_line(t_data *data);
 #endif

@@ -18,34 +18,36 @@ void win_close(int keycode, t_data *data)
 	mlx_destroy_window(data->mlx, data->mlx_win);
 }
 
+/*******************************************************************************
+** pixel put to image                                                          *
+** found on : https://s.42l.fr/putpximg                                        *
+*******************************************************************************/
+
 int my_mlx_pixel_put(t_buffer *data, int x, int y, int color)
 {
 	char	*dst;
 
 	if (x > SIZE_X || x < 0)
-	{
-//		printf("trying to draw outside canvas x:%d y%d", x, y);
 		return (1);
-	}
 	if (y > SIZE_Y || y < 0)
-	{
-//		printf("trying to draw outside canvas x:%d y%d", x, y);
 		return (1);
-	}
 	dst = data->addr + (y * data->line_length + x * (data->bit_per_pixel / 8));
 	*(unsigned int*)dst = color;
 	return (0);
 }
 
-/* Bresenham's line algorithm
-** https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#Line_equation
-*/
 static int ft_abs(int n)
 {
 	if (n < 0)
 		return (-n);
 	return (n);
 }
+
+/*******************************************************************************
+** Bresenham's line algorithm                                                  *
+** https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm                  *
+*******************************************************************************/
+
 void	draw_line_low(int x_from,int y_from,int x_to,int y_to,t_data *data, int color)
 {
 	int dx, dy, y_inc, D, x, y;
@@ -123,7 +125,7 @@ void	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color)
 	}
 }
 
-void clear_img(t_data *data)
+void clear_buffer(t_data *data)
 {
 	int x,y;
 	y = 0;
@@ -144,55 +146,27 @@ void clear_img(t_data *data)
 int render(t_data *data)
 {
 	static int frame = 0;
-	static int anim = 1;
-	int			i = 0;
-	int 		j = 0;
-
 	if (frame == 0)
 	{
-		clear_img(data);
+		clear_buffer(data);
 		frame ++;
 	}
 	else if (frame == 1)
 	{
-		if (anim >= 20)
-			anim = 1;
-		else
-			anim ++;
-		i = 0;
-		j = 0;
-		while (i < data->size_x)
-		{
-			draw_line(i, j,data->size_x,data->size_y,data,0x7F0000);
-			i += anim;
-		}
-		j = 0;
-		i = 0;
-		while (j < data->size_y)
-		{
-			draw_line(i, j,data->size_x,data->size_y,data,0x7F00);
-			j += anim;
-		}
-		i = 0;
-		j = SIZE_Y;
-		while (i < data->size_x)
-		{
-			draw_line(i, j,0,0,data,0x7F0000);
-			i += anim;
-		}
-		j = 0;
-		i = SIZE_X;
-		while (j < data->size_y)
-		{
-			draw_line(i, j,0,0,data,0x7F00);
-			j += anim;
-		}
-
+		//game logic
 		frame ++;
 	}
 	else if (frame == 2)
 	{
+		// graphic calc
+		test_line(data);
+		frame ++;
+	}
+	else if (frame == 3)
+	{
+#ifdef TEST_LINE
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->dbl_buffer->img, 0 ,0);
+#endif
 		frame ++;
 	}
 	else if (frame >= FRAME_MAX)
