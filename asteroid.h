@@ -43,6 +43,7 @@ int		my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
 void 	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color);
 void	clear_buffer(t_data *data);
 int 	render(t_data *data);
+t_data *main_init(void);
 // test functions :
 void 	test_line(t_data *data);
 void	test_line2(t_data *data);

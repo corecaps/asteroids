@@ -39,7 +39,7 @@ int my_mlx_pixel_put(t_buffer *data, int x, int y, int color)
  * Absolute value utility function                                             *
  ******************************************************************************/
 
-static int ft_abs(int n)
+int ft_abs(int n)
 {
 	if (n < 0)
 		return (-n);
@@ -148,43 +148,4 @@ void clear_buffer(t_data *data)
 	}
 
 
-}
-/*******************************************************************************
- * Render (data) is hooked to the refresh loop                                 *
- ******************************************************************************/
-
-int render(t_data *data)
-{
-	static int frame = 0;
-	if (frame == 0)
-	{
-		clear_buffer(data);
-		frame ++;
-	}
-	else if (frame == 1)
-	{
-		// TODO game logic
-		frame ++;
-	}
-	else if (frame == 2)
-	{
-		// TODO graphic calc
-//		test_line(data);
-//		test_line2(data);
-		frame ++;
-	}
-	else if (frame == 3)
-	{
-		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img_buffer->img, 0 ,0);
-		frame ++;
-	}
-	else if (frame >= FRAME_MAX)
-	{
-		frame = 0;
-	}
-	else
-	{
-		frame ++;
-	}
-	return (0);
 }

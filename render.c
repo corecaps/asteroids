@@ -1,39 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 16:44:10 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/07/10 16:44:14 by jgarcia          ###   ########.fr       */
+/*   Created: 2022/07/11 17:48:09 by jgarcia           #+#    #+#             */
+/*   Updated: 2022/07/11 17:48:15 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asteroid.h"
 
 /*******************************************************************************
- * Cleanly free heap allocated space for the data structures                   *
+ * Render (data) is hooked to the refresh loop                                 *
  ******************************************************************************/
 
-void main_memory_clean(t_data *data)
+int render(t_data *data)
 {
-	mlx_destroy_image(data->mlx,data->img_buffer->img);
-	free(data->img_buffer);
-	free(data->mlx);
-	free(data);
-}
-
-/*******************************************************************************
- * Main takes no args at the moment, config is done in asteroid.h              *
- ******************************************************************************/
-
-int main(void)
-{
-	t_data *data;
-
-	data = main_init();
-	mlx_loop(data->mlx);
-	main_memory_clean(data);
+	static int frame = 0;
+	if (frame == 0)
+	{
+		clear_buffer(data);
+		frame ++;
+	}
+	else if (frame == 1)
+	{
+		// TODO game logic
+		frame ++;
+	}
+	else if (frame == 2)
+	{
+		// TODO graphic calc
+//		test_line(data);
+//		test_line2(data);
+		frame ++;
+	}
+	else if (frame == 3)
+	{
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img_buffer->img, 0 ,0);
+		frame ++;
+	}
+	else if (frame >= FRAME_MAX)
+	{
+		frame = 0;
+	}
+	else
+	{
+		frame ++;
+	}
 	return (0);
 }
