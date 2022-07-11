@@ -25,7 +25,7 @@
 typedef struct s_buffer
 {
 	void	*img;
-	char 	*addr;
+	char 	*address;
 	int 	bit_per_pixel;
 	int 	line_length;
 	int 	endian;

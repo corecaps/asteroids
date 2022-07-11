@@ -38,10 +38,16 @@ void main_mlx_init(t_data *data)
 	data->img_buffer->img = mlx_new_image(data->mlx,
 										  data->size_x + 1,
 										  data->size_y + 1);
-	data->img_buffer->addr = mlx_get_data_addr(data->img_buffer->img,
-											   &data->img_buffer->bit_per_pixel,
-											   &data->img_buffer->line_length,
-											   &data->img_buffer->endian);
+	data->img_buffer->address = mlx_get_data_addr(data->img_buffer->img,
+												  &data->img_buffer->bit_per_pixel,
+												  &data->img_buffer->line_length,
+												  &data->img_buffer->endian);
+}
+
+void set_data(t_data *data)
+{
+	data->size_x = SIZE_X;
+	data->size_y = SIZE_Y;
 }
 
 /*******************************************************************************
@@ -58,8 +64,7 @@ t_data *main_init(void)
 	t_data *data;
 
 	data = alloc_data(data);
-	data->size_x = SIZE_X;
-	data->size_y = SIZE_Y;
+	set_data(data);
 	main_mlx_init(data);
 	mlx_hook(data->mlx_win, 2, 1L<<0, win_close, data);
 	mlx_loop_hook(data->mlx, render, data);
