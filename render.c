@@ -33,16 +33,12 @@ int render(t_data *data)
 	{
 		// TODO graphic calc
 //		test_line(data);
-//		test_line2(data);
-		frame ++;
-	}
-	else if (frame == 3)
-	{
-		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img_buffer->img, 0 ,0);
+		test_line2(data);
 		frame ++;
 	}
 	else if (frame >= FRAME_MAX)
 	{
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img_buffer->img, 0 ,0);
 		frame = 0;
 	}
 	else

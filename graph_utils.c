@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graph_x.c                                          :+:      :+:    :+:   */
+/*   graph_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -27,11 +27,9 @@ int my_mlx_pixel_put(t_buffer *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x > SIZE_X || x < 0)
+	if (x > SIZE_X || x < 0 || y > SIZE_Y || y < 0)
 		return (1);
-	if (y > SIZE_Y || y < 0)
-		return (1);
-	dst = data->addr + (y * data->line_length + x * (data->bit_per_pixel / 8));
+	dst = data->address + (y * data->line_length + x * (data->bit_per_pixel / 8));
 	*(unsigned int*)dst = color;
 	return (0);
 }
@@ -63,17 +61,16 @@ void	draw_line_low(int x_from,int y_from,int x_to,int y_to,t_data *data, int col
 		dy = -dy;
 	}
 	D = (2 * dy) - dx;
-	y = y_from;
-	for (x = x_from; x <= x_to;x++)
+	for (x = x_from,y = y_from; x <= x_to;x++)
 	{
 		my_mlx_pixel_put(data->img_buffer, x, y, color);
 		if (D > 0)
 		{
 			y += y_inc;
-			D = D + (2 * (dy - dx));
+			D += 2 * (dy - dx);
 		}
 		else
-			D = D + 2 * dy;
+			D += 2 * dy;
 	}
 }
 
@@ -88,17 +85,17 @@ void	draw_line_high(int x_from,int y_from,int x_to,int y_to,t_data *data, int co
 		x_inc = -1;
 		dx = -dx;
 	}
-	x = x_from;
-	for (y = y_from;y <= y_to;y ++)
+	D = (2 * dx) - dy;
+	for (y = y_from, x = x_from;y <= y_to;y ++)
 	{
 		my_mlx_pixel_put(data->img_buffer, x, y, color);
 		if (D > 0)
 		{
 			x += x_inc;
-			D = D + (2 * (dx - dy));
+			D += 2 * (dx - dy);
 		}
 		else
-			D = D + 2 * dx;
+			D += 2 * dx;
 	}
 }
 
@@ -134,18 +131,9 @@ void	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color)
 
 void clear_buffer(t_data *data)
 {
-	int x,y;
-	y = 0;
-	while (y < data->size_y - 1)
+	for (int y = 0; y < (data->size_y - 1); y ++)
 	{
-		x = 0;
-		while (x < data->size_x - 1)
-		{
+		for (int x = 0;x < (data->size_x - 1);x ++)
 			my_mlx_pixel_put(data->img_buffer, x, y, 0);
-			x ++;
-		}
-		y ++;
 	}
-
-
 }

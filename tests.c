@@ -64,7 +64,7 @@ void	test_line2(t_data *data)
 	if (anim_y >= SIZE_Y-1)
 		anim_y = 0;
 	else
-		anim_y ++;
-	draw_line(anim_x,0,SIZE_X-1-anim_x,SIZE_Y-1,data,0xFF0000);
-	draw_line(SIZE_X - 1,anim_y,0,SIZE_Y-1-anim_y,data,0xFF00);
+		anim_y += 2;
+	draw_line(anim_x,0,SIZE_X-anim_x,SIZE_Y,data,0xFF0000);
+	draw_line(SIZE_X,anim_y,0,SIZE_Y-anim_y,data,0xFF00);
 }
