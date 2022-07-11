@@ -36,12 +36,14 @@ typedef struct	s_data
 	int			size_y;
 	void		*mlx;
 	void		*mlx_win;
-	t_buffer	*dbl_buffer;
+	t_buffer	*img_buffer;
 } t_data;
 void	win_close(int keycode, t_data *data);
 int		my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
 void 	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color);
 void	clear_buffer(t_data *data);
 int 	render(t_data *data);
+// test functions :
 void 	test_line(t_data *data);
+void	test_line2(t_data *data);
 #endif

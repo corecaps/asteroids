@@ -35,6 +35,9 @@ int my_mlx_pixel_put(t_buffer *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 	return (0);
 }
+/*******************************************************************************
+ * Absolute value utility function                                             *
+ ******************************************************************************/
 
 static int ft_abs(int n)
 {
@@ -63,7 +66,7 @@ void	draw_line_low(int x_from,int y_from,int x_to,int y_to,t_data *data, int col
 	y = y_from;
 	for (x = x_from; x <= x_to;x++)
 	{
-		my_mlx_pixel_put(data->dbl_buffer,x,y,color);
+		my_mlx_pixel_put(data->img_buffer, x, y, color);
 		if (D > 0)
 		{
 			y += y_inc;
@@ -88,7 +91,7 @@ void	draw_line_high(int x_from,int y_from,int x_to,int y_to,t_data *data, int co
 	x = x_from;
 	for (y = y_from;y <= y_to;y ++)
 	{
-		my_mlx_pixel_put(data->dbl_buffer,x,y,color);
+		my_mlx_pixel_put(data->img_buffer, x, y, color);
 		if (D > 0)
 		{
 			x += x_inc;
@@ -125,6 +128,10 @@ void	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color)
 	}
 }
 
+/*******************************************************************************
+ * Fill img buffer with 0x0 (non transparent black)                            *
+ ******************************************************************************/
+
 void clear_buffer(t_data *data)
 {
 	int x,y;
@@ -134,7 +141,7 @@ void clear_buffer(t_data *data)
 		x = 0;
 		while (x < data->size_x - 1)
 		{
-			my_mlx_pixel_put(data->dbl_buffer,x,y,0);
+			my_mlx_pixel_put(data->img_buffer, x, y, 0);
 			x ++;
 		}
 		y ++;
@@ -142,6 +149,9 @@ void clear_buffer(t_data *data)
 
 
 }
+/*******************************************************************************
+ * Render (data) is hooked to the refresh loop                                 *
+ ******************************************************************************/
 
 int render(t_data *data)
 {
@@ -153,20 +163,19 @@ int render(t_data *data)
 	}
 	else if (frame == 1)
 	{
-		//game logic
+		// TODO game logic
 		frame ++;
 	}
 	else if (frame == 2)
 	{
-		// graphic calc
-		test_line(data);
+		// TODO graphic calc
+//		test_line(data);
+//		test_line2(data);
 		frame ++;
 	}
 	else if (frame == 3)
 	{
-#ifdef TEST_LINE
-		mlx_put_image_to_window(data->mlx, data->mlx_win, data->dbl_buffer->img, 0 ,0);
-#endif
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img_buffer->img, 0 ,0);
 		frame ++;
 	}
 	else if (frame >= FRAME_MAX)

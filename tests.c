@@ -15,8 +15,8 @@
 void test_line(t_data *data)
 {
 	static int	anim = 1;
-	int 		i = 0;
-	int 		j = 0;
+	int 		i;
+	int 		j;
 	if (anim >= 20)
 		anim = 1;
 	else
@@ -50,4 +50,21 @@ void test_line(t_data *data)
 		j += anim;
 	}
 
+}
+
+void	test_line2(t_data *data)
+{
+	static anim_x = 0;
+	static anim_y = 0;
+
+	if (anim_x >= SIZE_X-1)
+		anim_x = 0;
+	else
+		anim_x ++;
+	if (anim_y >= SIZE_Y-1)
+		anim_y = 0;
+	else
+		anim_y ++;
+	draw_line(anim_x,0,SIZE_X-1-anim_x,SIZE_Y-1,data,0xFF0000);
+	draw_line(SIZE_X - 1,anim_y,0,SIZE_Y-1-anim_y,data,0xFF00);
 }
