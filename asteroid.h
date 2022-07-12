@@ -30,13 +30,40 @@ typedef struct s_buffer
 	int 	line_length;
 	int 	endian;
 } t_buffer;
+typedef struct s_asteroid
+{
+	int		x;
+	int 	y;
+	int 	size;
+	int 	points[20];
+	float	accel;
+	float	velocity;
+	float	angle;
+} t_asteroid;
+typedef struct s_asteroid_lst
+{
+	struct s_asteroid_lst	*next;
+	t_asteroid 				asteroid;
+} t_asteroid_lst;
+typedef struct	s_player
+{
+	int 	x;
+	int 	y;
+	float	angle;
+	float	accel;
+	float	velocity;
+	int 	point[6];
+} t_player;
 typedef struct	s_data
 {
-	int			size_x;
-	int			size_y;
-	void		*mlx;
-	void		*mlx_win;
-	t_buffer	*img_buffer;
+	int				size_x;
+	int				size_y;
+	int 			time_stamp;
+	void			*mlx;
+	void			*mlx_win;
+	t_buffer		*img_buffer;
+	t_asteroid_lst	*asteroid_lst;
+	t_player 		*player;
 } t_data;
 void	win_close(int keycode, t_data *data);
 int		my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
