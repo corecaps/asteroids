@@ -31,9 +31,10 @@ int render(t_data *data)
 	}
 	else if (frame == 2)
 	{
+		draw_asteroid(data);
 		// TODO graphic calc
 //		test_line(data);
-		test_line2(data);
+//		test_line2(data);
 		frame ++;
 	}
 	else if (frame >= FRAME_MAX)

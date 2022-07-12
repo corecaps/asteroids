@@ -30,7 +30,7 @@ void main_memory_clean(t_data *data)
 
 int main(void)
 {
-	t_data *data;
+	t_data *data = NULL;
 
 	data = main_init();
 	mlx_loop(data->mlx);

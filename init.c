@@ -12,6 +12,7 @@
 
 #include "asteroid.h"
 
+void init_player(t_data *data);
 
 t_data *alloc_data(t_data *data)
 {
@@ -22,7 +23,8 @@ t_data *alloc_data(t_data *data)
 		exit(-1);
 	}
 	data->img_buffer = malloc(sizeof(t_buffer));
-	if (data->img_buffer == NULL)
+	data->player = malloc(sizeof (t_player));
+	if (data->img_buffer == NULL || data->player == NULL)
 	{
 		printf("ALLOCATION ERROR");
 		exit(-1);
@@ -44,16 +46,33 @@ void main_mlx_init(t_data *data)
 												  &data->img_buffer->endian);
 }
 
+void init_player(t_data *data)
+{
+	data->player->x = SIZE_X / 2;
+	data->player->y = SIZE_Y / 2;
+	data->player->accel = 0.0f;
+	data->player->velocity = 0.0f;
+	data->player->angle = 0.0f;
+}
+
 void set_data(t_data *data)
 {
 	data->size_x = SIZE_X;
 	data->size_y = SIZE_Y;
+	data->asteroid_lst = NULL;
+	pop_asteroid(data,50,((float)(rand() % 100))/10);
+	pop_asteroid(data,50,((float)(rand() % 100))/10);
+	pop_asteroid(data,50,((float)(rand() % 100))/10);
+	pop_asteroid(data,50,((float)(rand() % 100))/10);
+	data->time_stamp = 0;
+	init_player(data);
 }
+
 
 /*******************************************************************************
  * main_init()
  * alloc memory for the data structures                                        *
- * initialize the data structure with correct datas                            *
+ * initialize the data structure with correct data                            *
  * create the main window                                                      *
  * create the img buffer                                                       *
  * hook the render function & key_events                                       *
