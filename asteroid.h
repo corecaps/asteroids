@@ -19,9 +19,7 @@
 # include <time.h>
 # include <string.h>
 # include <math.h>
-# define SIZE_X 800
-# define SIZE_Y 600
-# define FRAME_MAX 10
+# include "config.h"
 # define RADIAN 0.0174532925
 
 typedef struct s_buffer
@@ -75,6 +73,7 @@ t_data *main_init(void);
 void	pop_asteroid(t_data *data, int size, float speed);
 void	draw_lst_asteroid(t_data *data);
 void	draw_asteroid(t_data *data, const t_asteroid_lst *node);
+void	main_memory_clean(t_data *data);
 // test functions :
 void 	test_line(t_data *data);
 void	test_line2(t_data *data);
