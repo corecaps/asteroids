@@ -54,8 +54,8 @@ void test_line(t_data *data)
 
 void	test_line2(t_data *data)
 {
-	static anim_x = 0;
-	static anim_y = 0;
+	static int anim_x = 0;
+	static int anim_y = 0;
 
 	if (anim_x >= SIZE_X-1)
 		anim_x = 0;

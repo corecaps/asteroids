@@ -31,7 +31,7 @@ int render(t_data *data)
 	}
 	else if (frame == 2)
 	{
-		draw_asteroid(data);
+		draw_lst_asteroid(data);
 		// TODO graphic calc
 //		test_line(data);
 //		test_line2(data);

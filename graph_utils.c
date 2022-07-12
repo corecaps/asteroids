@@ -137,3 +137,40 @@ void clear_buffer(t_data *data)
 			my_mlx_pixel_put(data->img_buffer, x, y, 0);
 	}
 }
+
+/*******************************************************************************
+ * draw the asteroid pointed by *node with the 20 points array in the struct   *
+ ******************************************************************************/
+
+void draw_asteroid(t_data *data, const t_asteroid_lst *node)
+{
+	for (int i = 2; i < 20; i += 2)
+	{
+		draw_line(node->asteroid->points[i-2],
+				  node->asteroid->points[i-1],
+				  node->asteroid->points[i],
+				  node->asteroid->points[i+1],
+				  data,0xFFFFFF);
+	}
+	draw_line(node->asteroid->points[18],
+			  node->asteroid->points[19],
+			  node->asteroid->points[0],
+			  node->asteroid->points[1],
+			  data,0xFFFFFF);
+}
+
+/*******************************************************************************
+ * call draw_asteroid for every asteroid in the linked list                    *
+ ******************************************************************************/
+
+void draw_lst_asteroid(t_data *data)
+{
+	t_asteroid_lst *node;
+
+	node = data->asteroid_lst;
+	while (node)
+	{
+		draw_asteroid(data, node);
+		node = node->next;
+	}
+}

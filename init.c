@@ -12,7 +12,10 @@
 
 #include "asteroid.h"
 
-void init_player(t_data *data);
+/*******************************************************************************
+ * allocate space on the heap for the game basic data structures               *
+ * in case of error a message is printed and exit(-1) is called                *
+ ******************************************************************************/
 
 t_data *alloc_data(t_data *data)
 {
@@ -32,6 +35,10 @@ t_data *alloc_data(t_data *data)
 	return data;
 }
 
+/*******************************************************************************
+ * initialize the mlx library, create the main window and the img buffer       *
+ ******************************************************************************/
+
 void main_mlx_init(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -46,6 +53,10 @@ void main_mlx_init(t_data *data)
 												  &data->img_buffer->endian);
 }
 
+/*******************************************************************************
+ * set initials values for the player struct                                   *
+ ******************************************************************************/
+
 void init_player(t_data *data)
 {
 	data->player->x = SIZE_X / 2;
@@ -54,6 +65,10 @@ void init_player(t_data *data)
 	data->player->velocity = 0.0f;
 	data->player->angle = 0.0f;
 }
+
+/*******************************************************************************
+ * set initial values for the data structures, pop the first asteroids         *
+ ******************************************************************************/
 
 void set_data(t_data *data)
 {
@@ -80,7 +95,7 @@ void set_data(t_data *data)
 
 t_data *main_init(void)
 {
-	t_data *data;
+	t_data *data = NULL;
 	srand(time(NULL));
 	data = alloc_data(data);
 	set_data(data);

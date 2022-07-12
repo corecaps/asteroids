@@ -73,7 +73,8 @@ void	clear_buffer(t_data *data);
 int 	render(t_data *data);
 t_data *main_init(void);
 void	pop_asteroid(t_data *data, int size, float speed);
-void	draw_asteroid(t_data *data);
+void	draw_lst_asteroid(t_data *data);
+void	draw_asteroid(t_data *data, const t_asteroid_lst *node);
 // test functions :
 void 	test_line(t_data *data);
 void	test_line2(t_data *data);
