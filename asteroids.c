@@ -66,14 +66,12 @@ void init_asteroid(int size, float speed, t_asteroid_lst *asteroid_node)
 	asteroid_node->asteroid->angle = 0.0f;
 	for (int i = 0; i < 10; i++)
 	{
-		offset = rand() % 10;
+		offset = rand() % (size / 2);
 		asteroid_node->asteroid->points[i * 2] = (int) (
 				asteroid_node->asteroid->x +
-				((size - 5 + offset) * sin(i * 36 * 0.0174532925)));
+				(((size / 2) + offset) * sin(i * 36 * RADIAN)));
 		asteroid_node->asteroid->points[(i * 2) + 1] = (int) (
 				asteroid_node->asteroid->y +
-				((size - 5 + offset) * cos(i * 36 * 0.0174532925)));
+				(((size / 2) + offset) * cos(i * 36 * RADIAN)));
 	}
-//	asteroid_node->asteroid->points[18] = asteroid_node->asteroid->points[0];
-//	asteroid_node->asteroid->points[19] = asteroid_node->asteroid->points[1];
 }

@@ -18,6 +18,8 @@
 
 void main_memory_clean(t_data *data)
 {
+	// TODO Clean player structure
+	// TODO Clean asteroid_lst linked list
 	mlx_destroy_image(data->mlx,data->img_buffer->img);
 	free(data->img_buffer);
 	free(data->mlx);

@@ -81,7 +81,7 @@ void set_data(t_data *data)
 t_data *main_init(void)
 {
 	t_data *data;
-
+	srand(time(NULL));
 	data = alloc_data(data);
 	set_data(data);
 	main_mlx_init(data);

@@ -22,6 +22,7 @@
 # define SIZE_X 800
 # define SIZE_Y 600
 # define FRAME_MAX 10
+# define RADIAN 0.0174532925
 
 typedef struct s_buffer
 {
