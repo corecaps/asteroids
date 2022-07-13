@@ -75,14 +75,11 @@ void set_data(t_data *data)
 	data->size_x = SIZE_X;
 	data->size_y = SIZE_Y;
 	data->asteroid_lst = NULL;
-	pop_asteroid(data,50,((float)(rand() % 100))/10);
-	pop_asteroid(data,50,((float)(rand() % 100))/10);
-	pop_asteroid(data,50,((float)(rand() % 100))/10);
-	pop_asteroid(data,50,((float)(rand() % 100))/10);
-	data->time_stamp = 0;
+	for (int n=0;n < 10;n++)
+		pop_asteroid(data, 50, get_rnd_delta(), get_rnd_delta());
+	clock_gettime(CLOCK_MONOTONIC, &data->last_frame);
 	init_player(data);
 }
-
 
 /*******************************************************************************
  * main_init()

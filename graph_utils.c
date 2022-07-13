@@ -26,9 +26,14 @@ void win_close(int keycode, t_data *data)
 int my_mlx_pixel_put(t_buffer *data, int x, int y, int color)
 {
 	char	*dst;
-
-	if (x > SIZE_X || x < 0 || y > SIZE_Y || y < 0)
-		return (1);
+	if (x < 0)
+		x = SIZE_X -(-x % SIZE_X);
+	if (x > SIZE_X)
+		x = x % SIZE_X;
+	if (y < 0)
+		y = SIZE_Y -(-y % SIZE_Y);
+	if (y > SIZE_Y)
+		y = y % SIZE_Y;
 	dst = data->address + (y * data->line_length + x * (data->bit_per_pixel / 8));
 	*(unsigned int*)dst = color;
 	return (0);
@@ -144,18 +149,19 @@ void clear_buffer(t_data *data)
 
 void draw_asteroid(t_data *data, const t_asteroid_lst *node)
 {
-	for (int i = 2; i < 20; i += 2)
+	t_point	*pt_array = node->asteroid->points;
+	for (int i = 1; i < 10; i ++)
 	{
-		draw_line(node->asteroid->points[i-2],
-				  node->asteroid->points[i-1],
-				  node->asteroid->points[i],
-				  node->asteroid->points[i+1],
-				  data,0xFFFFFF);
+		draw_line((int)round(pt_array[i - 1].x),
+				  (int)round(pt_array[i - 1].y),
+				  (int)round(pt_array[i].x),
+				  (int)round(pt_array[i].y),
+				  data, 0xFFFFFF);
 	}
-	draw_line(node->asteroid->points[18],
-			  node->asteroid->points[19],
-			  node->asteroid->points[0],
-			  node->asteroid->points[1],
+	draw_line((int)round(pt_array[9].x),
+			  (int)round(pt_array[9].y),
+			  (int)round(pt_array[0].x),
+			  (int)round(pt_array[0].y),
 			  data,0xFFFFFF);
 }
 

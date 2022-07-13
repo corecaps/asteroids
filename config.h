@@ -14,5 +14,5 @@
 #define ASTEROIDS_CONFIG_H
 # define SIZE_X 800
 # define SIZE_Y 600
-# define FRAME_MAX 10
+# define FRAME_MAX 4
 #endif //ASTEROIDS_CONFIG_H
