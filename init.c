@@ -76,7 +76,7 @@ void set_data(t_data *data)
 	data->size_y = SIZE_Y;
 	data->asteroid_lst = NULL;
 	for (int n=0;n < 10;n++)
-		pop_asteroid(data, 50, get_rnd_delta(), get_rnd_delta());
+		pop_asteroid(data, rand()%50, get_rnd_delta(), get_rnd_delta());
 	clock_gettime(CLOCK_MONOTONIC, &data->last_frame);
 	init_player(data);
 }

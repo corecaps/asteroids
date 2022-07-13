@@ -71,11 +71,12 @@ typedef struct	s_data
 } t_data;
 void	win_close(int keycode, t_data *data);
 int		my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
+void 	wrap_coord(int *x, int *y);
 void 	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color);
 void	clear_buffer(t_data *data);
 int 	render(t_data *data);
 t_data *main_init(void);
-void pop_asteroid(t_data *data, int size, double dx, double dy);
+void	pop_asteroid(t_data *data, int size, double dx, double dy);
 void	draw_lst_asteroid(t_data *data);
 void	draw_asteroid(t_data *data, const t_asteroid_lst *node);
 void	main_memory_clean(t_data *data);

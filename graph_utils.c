@@ -26,18 +26,24 @@ void win_close(int keycode, t_data *data)
 int my_mlx_pixel_put(t_buffer *data, int x, int y, int color)
 {
 	char	*dst;
-	if (x < 0)
-		x = SIZE_X -(-x % SIZE_X);
-	if (x > SIZE_X)
-		x = x % SIZE_X;
-	if (y < 0)
-		y = SIZE_Y -(-y % SIZE_Y);
-	if (y > SIZE_Y)
-		y = y % SIZE_Y;
+	wrap_coord(&x, &y);
 	dst = data->address + (y * data->line_length + x * (data->bit_per_pixel / 8));
 	*(unsigned int*)dst = color;
 	return (0);
 }
+
+void wrap_coord(int *x, int *y)
+{
+	if ((*x) < 0)
+		(*x) = SIZE_X -(-(*x) % SIZE_X);
+	if ((*x) > SIZE_X)
+		(*x) = (*x) % SIZE_X;
+	if ((*y) < 0)
+		(*y) = SIZE_Y -(-(*y) % SIZE_Y);
+	if ((*y) > SIZE_Y)
+		(*y) = (*y) % SIZE_Y;
+}
+
 /*******************************************************************************
  * Absolute value utility function                                             *
  ******************************************************************************/
