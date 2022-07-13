@@ -76,7 +76,7 @@ void set_data(t_data *data)
 	data->size_y = SIZE_Y;
 	data->asteroid_lst = NULL;
 	for (int n=0;n < 10;n++)
-		pop_asteroid(data, rand()%50, get_rnd_delta(), get_rnd_delta());
+		pop_asteroid(data, rand()%50 + 5, get_rnd_delta(), get_rnd_delta());
 	clock_gettime(CLOCK_MONOTONIC, &data->last_frame);
 	init_player(data);
 }
@@ -97,7 +97,7 @@ t_data *main_init(void)
 	data = alloc_data(data);
 	set_data(data);
 	main_mlx_init(data);
-	mlx_hook(data->mlx_win, 2, 1L<<0, win_close, data);
+	mlx_hook(data->mlx_win, 2, 1L << 0, key_pressed, data);
 	mlx_loop_hook(data->mlx, render, data);
 	return (data);
 }

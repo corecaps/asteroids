@@ -69,9 +69,10 @@ typedef struct	s_data
 	t_asteroid_lst	*asteroid_lst;
 	t_player 		*player;
 } t_data;
-void	win_close(int keycode, t_data *data);
+int 	key_pressed(int keycode, t_data *data);
 int		my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
-void 	wrap_coord(int *x, int *y);
+void 	warp_coord(int *x, int *y);
+void warp_coord_double(double *x, double *y);
 void 	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color);
 void	clear_buffer(t_data *data);
 int 	render(t_data *data);

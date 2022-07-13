@@ -12,10 +12,20 @@
 
 #include "asteroid.h"
 
-void win_close(int keycode, t_data *data)
+int key_pressed(int keycode, t_data *data)
 {
-	(void) keycode;
-	mlx_destroy_window(data->mlx, data->mlx_win);
+	// ESC to quit
+	if (keycode == 65307)
+		mlx_destroy_window(data->mlx, data->mlx_win);
+	if (keycode == 119 || keycode == 65362)
+		printf("up\n");
+	if (keycode == 115 || keycode == 65364)
+		printf("down\n");
+	if (keycode == 97 || keycode == 65361)
+		printf("left\n");
+	if (keycode == 100 || keycode == 65363)
+		printf("right\n");
+	return (0);
 }
 
 /*******************************************************************************
@@ -26,13 +36,13 @@ void win_close(int keycode, t_data *data)
 int my_mlx_pixel_put(t_buffer *data, int x, int y, int color)
 {
 	char	*dst;
-	wrap_coord(&x, &y);
+	warp_coord(&x, &y);
 	dst = data->address + (y * data->line_length + x * (data->bit_per_pixel / 8));
 	*(unsigned int*)dst = color;
 	return (0);
 }
 
-void wrap_coord(int *x, int *y)
+void warp_coord(int *x, int *y)
 {
 	if ((*x) < 0)
 		(*x) = SIZE_X -(-(*x) % SIZE_X);
@@ -42,6 +52,17 @@ void wrap_coord(int *x, int *y)
 		(*y) = SIZE_Y -(-(*y) % SIZE_Y);
 	if ((*y) > SIZE_Y)
 		(*y) = (*y) % SIZE_Y;
+}
+void warp_coord_double(double *x, double *y)
+{
+	if ((*x) < 0)
+		(*x) = SIZE_X -(*x) ;
+	if ((*x) > SIZE_X)
+		(*x) = (*x) - SIZE_X;
+	if ((*y) < 0)
+		(*y) = SIZE_Y -(*y);
+	if ((*y) > SIZE_Y)
+		(*y) = (*y) - SIZE_Y;
 }
 
 /*******************************************************************************

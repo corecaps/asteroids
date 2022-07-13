@@ -18,10 +18,8 @@ void	asteroid_translate(t_asteroid *asteroid, t_data *data)
 
 	asteroid->x += asteroid->dx * data->elapsed_time;
 	asteroid->y += asteroid->dy * data->elapsed_time;
-	wrap_coord(&asteroid->x,&asteroid->y);
 	for (int i = 0;i < 10;i ++)
 	{
-		wrap_coord(&pt_array[i].x,&pt_array[i].y);
 		pt_array[i].x += asteroid->dx;
 		pt_array[i].y += asteroid->dy;
 	}
@@ -34,7 +32,6 @@ void	asteroid_rotate(t_asteroid *asteroid, t_data *data)
 	double dx = asteroid->x;
 	double dy = asteroid->y;
 	double theta = 0.05 * RADIAN;
-
 	for (int i = 0;i < 10;i++)
 	{
 		x = pt_array[i].x;
