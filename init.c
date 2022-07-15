@@ -59,9 +59,10 @@ void main_mlx_init(t_data *data)
 
 void init_player(t_data *data)
 {
-	data->player->x = SIZE_X / 2;
-	data->player->y = SIZE_Y / 2;
-	data->player->accel = 0.0f;
+	data->player->x = (double)SIZE_X / 2;
+	data->player->y = (double)SIZE_Y / 2;
+	data->player->dx = 0.0;
+	data->player->dy = 0.0;
 	data->player->velocity = 0.0f;
 	data->player->angle = 0.0f;
 }

@@ -31,6 +31,7 @@ int render(t_data *data)
 	{
 		get_elapsed_time(data);
 		asteroid_move(data);
+		player_move(data);
 		// TODO player_move(data);
 		// TODO bullet_move(data);
 		// TODO particle_move(data);
@@ -40,6 +41,7 @@ int render(t_data *data)
 	else if (frame == 2)
 	{
 		draw_lst_asteroid(data);
+		draw_player(data);
 		// TODO draw_player
 		// TODO draw_bullets
 		// TODO draw_particle

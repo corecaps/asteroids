@@ -37,3 +37,10 @@ void	asteroid_move(t_data *data)
 		node = node->next;
 	}
 }
+
+void	player_move(t_data *data)
+{
+	data->player->x += data->player->dx;
+	data->player->y += data->player->dy;
+	warp_coord_double(&data->player->x,&data->player->y);
+}

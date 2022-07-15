@@ -18,13 +18,29 @@ int key_pressed(int keycode, t_data *data)
 	if (keycode == 65307)
 		mlx_destroy_window(data->mlx, data->mlx_win);
 	if (keycode == 119 || keycode == 65362)
-		printf("up\n");
+	{
+		data->player->dx +=
+				sin(abs(data->player->angle) * RADIAN) * 20.0f * data->elapsed_time;
+		data->player->dy += -cos(abs(data->player->angle)* RADIAN) * 20.0f * data->elapsed_time;
+	}
 	if (keycode == 115 || keycode == 65364)
-		printf("down\n");
+	{
+		data->player->dx -= sin(data->player->angle* RADIAN) * 20.0f * data->elapsed_time;
+		data->player->dy -= -cos(data->player->angle * RADIAN) * 20.0f * data->elapsed_time;
+	}
+
 	if (keycode == 97 || keycode == 65361)
-		printf("left\n");
+	{
+		data->player->angle -= 10.0;
+		if (data->player->angle < 0)
+			data->player->angle = 360;
+	}
 	if (keycode == 100 || keycode == 65363)
-		printf("right\n");
+	{
+		data->player->angle += 10.0;
+		if (data->player->angle > 360)
+			data->player->angle = 0.0;
+	}
 	return (0);
 }
 
@@ -55,14 +71,14 @@ void warp_coord(int *x, int *y)
 }
 void warp_coord_double(double *x, double *y)
 {
-	if ((*x) < 0)
-		(*x) = SIZE_X -(*x) ;
-	if ((*x) > SIZE_X)
-		(*x) = (*x) - SIZE_X;
-	if ((*y) < 0)
-		(*y) = SIZE_Y -(*y);
-	if ((*y) > SIZE_Y)
-		(*y) = (*y) - SIZE_Y;
+	if ((*x) < 0.0)
+		(*x) = SIZE_X -(*x) - 1;
+	if ((*x) > (double)SIZE_X)
+		(*x) = (*x) - SIZE_X - 1;
+	if ((*y) < 0.0)
+		(*y) = SIZE_Y -(*y) - 1;
+	if ((*y) > (double)SIZE_Y)
+		(*y) = (*y) - SIZE_Y - 1;
 }
 
 /*******************************************************************************
@@ -221,4 +237,40 @@ void draw_lst_asteroid(t_data *data)
 		draw_asteroid(data, node->asteroid, angle_offset);
 		node = node->next;
 	}
+}
+
+void	draw_player(t_data *data)
+{
+	double	x= data->player->x;
+	double	y= data->player->y;
+	double	angle = data->player->angle;
+	t_point	pt_array[3];
+
+	pt_array[0].x = x +	(PLAYER_SIZE * sin((angle)* RADIAN));
+	pt_array[0].y = y +	(PLAYER_SIZE * -cos((angle)* RADIAN));
+	pt_array[1].x = x +	((PLAYER_SIZE / 2) * sin(((angle - 120))* RADIAN));
+	pt_array[1].y = y +	((PLAYER_SIZE / 2) * -cos(((angle - 120))* RADIAN));
+	pt_array[2].x = x +	((PLAYER_SIZE / 2) * sin(((angle + 120))* RADIAN));
+	pt_array[2].y = y +	((PLAYER_SIZE / 2) * -cos(((angle + 120))* RADIAN));
+
+	draw_line((int)round(pt_array[0].x),
+			  (int)round(pt_array[0].y),
+			  (int)round(pt_array[1].x),
+			  (int)round(pt_array[1].y),
+			  data,0xffffff);
+	draw_line((int)round(pt_array[0].x),
+			  (int)round(pt_array[0].y),
+			  (int)round(pt_array[2].x),
+			  (int)round(pt_array[2].y),
+			  data,0xffffff);
+	draw_line((int)round(x),
+			  (int)round(y),
+			  (int)round(pt_array[1].x),
+			  (int)round(pt_array[1].y),
+			  data,0xffffff);
+	draw_line((int)round(x),
+			  (int)round(y),
+			  (int)round(pt_array[2].x),
+			  (int)round(pt_array[2].y),
+			  data,0xffffff);
 }

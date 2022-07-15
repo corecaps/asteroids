@@ -15,4 +15,5 @@
 # define SIZE_X 800
 # define SIZE_Y 600
 # define FRAME_MAX 4
+# define PLAYER_SIZE 20
 #endif //ASTEROIDS_CONFIG_H

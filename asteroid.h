@@ -53,11 +53,12 @@ typedef struct	s_player
 {
 	double 	x;
 	double 	y;
-	float	angle;
-	float	accel;
-	float	velocity;
-	int 	point[6];
+	double 	dx;
+	double	dy;
+	double angle;
+	double	velocity;
 } t_player;
+
 typedef struct	s_data
 {
 	int				size_x;
@@ -76,14 +77,16 @@ void 	warp_coord(int *x, int *y);
 void warp_coord_double(double *x, double *y);
 void 	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color);
 void	clear_buffer(t_data *data);
+void	draw_player(t_data *data);
 int 	render(t_data *data);
 t_data *main_init(void);
 void	pop_asteroid(t_data *data, int size, double dx, double dy);
 void	draw_lst_asteroid(t_data *data);
-void draw_asteroid(t_data *data, t_asteroid *asteroid, double angle_offset);
+void	draw_asteroid(t_data *data, t_asteroid *asteroid, double angle_offset);
 void	main_memory_clean(t_data *data);
 void	asteroid_translate(t_asteroid *asteroid, t_data *data);
 void	asteroid_move(t_data *data);
+void	player_move(t_data *data);
 void	get_elapsed_time(t_data *data);
 double	get_rnd_delta();
 // test functions :
