@@ -14,31 +14,17 @@
 
 void	asteroid_translate(t_asteroid *asteroid, t_data *data)
 {
-	t_point	*pt_array = asteroid->points;
-
 	asteroid->x += asteroid->dx * data->elapsed_time;
 	asteroid->y += asteroid->dy * data->elapsed_time;
-	for (int i = 0;i < 10;i ++)
-	{
-		pt_array[i].x += asteroid->dx;
-		pt_array[i].y += asteroid->dy;
-	}
-}
-
-void	asteroid_rotate(t_asteroid *asteroid, t_data *data)
-{
-	t_point	*pt_array = asteroid->points;
-	double x,y;
-	double dx = asteroid->x;
-	double dy = asteroid->y;
-	double theta = 0.05 * RADIAN;
-	for (int i = 0;i < 10;i++)
-	{
-		x = pt_array[i].x;
-		y = pt_array[i].y;
-		pt_array[i].x = ((x - dx) * cos(theta)) - ((y - dy) * sin(theta)) + dx;
-		pt_array[i].y = dy - ((dy - y) * cos(theta)) + ((x - dx) * sin(theta));
-	}
+	if (asteroid->x > SIZE_X)
+		asteroid->x -= SIZE_X;
+	if (asteroid->x < 0)
+		asteroid->x = asteroid->x + SIZE_X;
+	if (asteroid->y > SIZE_Y)
+		asteroid->y -= SIZE_Y;
+	if (asteroid->y < 0)
+		asteroid->y = asteroid->y + SIZE_Y;
+//	printf("[%f,%f] + [%f,%f]\n",asteroid->x,asteroid->y,asteroid->dx,asteroid->dy);
 }
 
 void	asteroid_move(t_data *data)
@@ -48,7 +34,6 @@ void	asteroid_move(t_data *data)
 	while (node)
 	{
 		asteroid_translate(node->asteroid,data);
-		asteroid_rotate(node->asteroid,data);
 		node = node->next;
 	}
 }

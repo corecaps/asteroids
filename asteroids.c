@@ -18,7 +18,7 @@
 
 double get_rnd_delta()
 {
-	return ((double)((rand() % 400) - 200) / 200);
+	return ((double)((rand() % 400) - 200) / 2);
 }
 
 /*******************************************************************************
@@ -48,13 +48,7 @@ void init_asteroid(int size, t_asteroid_lst *asteroid_node, double dx, double dy
 	asteroid_node->asteroid->dy = dy;
 	for (int i = 0; i < 10; i++)
 	{
-		offset = rand() % (size / 2);
-		asteroid_node->asteroid->points[i].x = (int) (
-				asteroid_node->asteroid->x +
-				(((size / 2) + offset) * sin(i * 36 * RADIAN)));
-		asteroid_node->asteroid->points[i].y = (int) (
-				asteroid_node->asteroid->y +
-				(((size / 2) + offset) * cos(i * 36 * RADIAN)));
+		asteroid_node->asteroid->offset[i] = rand() % (size / 2);
 	}
 }
 

@@ -48,6 +48,7 @@ int render(t_data *data)
 	else if (frame >= FRAME_MAX)
 	{
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img_buffer->img, 0 ,0);
+		mlx_string_put(data->mlx,data->mlx_win,SIZE_X / 4 + 50,20,0xFFFFFF,"42-ASTEROIDs Alpha-Press ESC to exit-Score : 0");
 		frame = 0;
 	}
 	else

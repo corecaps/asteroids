@@ -174,9 +174,19 @@ void clear_buffer(t_data *data)
  * draw the asteroid pointed by *node with the 20 points array in the struct   *
  ******************************************************************************/
 
-void draw_asteroid(t_data *data, const t_asteroid_lst *node)
+void draw_asteroid(t_data *data, t_asteroid *asteroid, double angle_offset)
 {
-	t_point	*pt_array = node->asteroid->points;
+	t_point	*pt_array = asteroid->points;
+	int 	size = asteroid->size;
+	int 	*offset = asteroid->offset;
+	for (int i = 0; i < 10;i ++)
+	{
+		pt_array[i].x =
+				asteroid->x +
+				(((size / 2) + offset[i]) * sin(((i * 36)+ angle_offset)* RADIAN));
+		pt_array[i].y = asteroid->y +
+						(((size / 2) + offset[i]) * cos(((i * 36)+angle_offset) * RADIAN));
+	}
 	for (int i = 1; i < 10; i ++)
 	{
 		draw_line((int)round(pt_array[i - 1].x),
@@ -199,11 +209,16 @@ void draw_asteroid(t_data *data, const t_asteroid_lst *node)
 void draw_lst_asteroid(t_data *data)
 {
 	t_asteroid_lst *node;
+	static double 	angle_offset = 0;
 
+	if (angle_offset == 360)
+		angle_offset = 0;
+	else
+		angle_offset += 0.25;
 	node = data->asteroid_lst;
 	while (node)
 	{
-		draw_asteroid(data, node);
+		draw_asteroid(data, node->asteroid, angle_offset);
 		node = node->next;
 	}
 }
