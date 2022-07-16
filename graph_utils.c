@@ -12,6 +12,11 @@
 
 #include "asteroid.h"
 
+/*******************************************************************************
+ * Gestion des evenements liees au touches presses
+ * TODO gerer les differents etats du jeu (LVL, UI)
+ ******************************************************************************/
+
 int key_pressed(int keycode, t_data *data)
 {
 	// ESC to quit
@@ -65,6 +70,10 @@ int my_mlx_pixel_put(t_buffer *data, int x, int y, int color)
 	return (0);
 }
 
+/*******************************************************************************
+ * warp integer coordinates                                                    *
+ ******************************************************************************/
+
 void warp_coord(int *x, int *y)
 {
 	if ((*x) < 0)
@@ -76,6 +85,11 @@ void warp_coord(int *x, int *y)
 	if ((*y) > SIZE_Y)
 		(*y) = (*y) % SIZE_Y;
 }
+
+/*******************************************************************************
+ * warp floating point coordinates
+ ******************************************************************************/
+
 void warp_coord_double(double *x, double *y)
 {
 	if ((*x) < 0.0)
@@ -245,7 +259,9 @@ void draw_lst_asteroid(t_data *data)
 		node = node->next;
 	}
 }
-
+/*******************************************************************************
+ * Draw player                                                                 *
+ ******************************************************************************/
 void	draw_player(t_data *data)
 {
 	double	x= data->player->x;
@@ -282,6 +298,10 @@ void	draw_player(t_data *data)
 			  data,0xffffff);
 }
 
+/*******************************************************************************
+ * go through the particle linked list and draw particles
+ ******************************************************************************/
+
 void	draw_particle_lst(t_data *data)
 {
 	t_particle_lst *node = data->particle_lst;
@@ -293,7 +313,10 @@ void	draw_particle_lst(t_data *data)
 		if (node->particle->ttl > 0)
 		{
 			node->particle->ttl --;
-			my_mlx_pixel_put(data->img_buffer,(int)round(node->particle->x),(int)round(node->particle->y),0xFF0000);
+			my_mlx_pixel_put(data->img_buffer,
+							 (int)round(node->particle->x),
+							 (int)round(node->particle->y),
+							 0xFF0000);
 		}
 		node = node->next;
 	}

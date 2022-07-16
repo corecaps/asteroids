@@ -3,13 +3,19 @@
 //
 
 #include "asteroid.h"
-
+/*******************************************************************************
+ * return last elements from particle linked list                              *
+ ******************************************************************************/
 t_particle_lst *particle_last(t_particle_lst *head)
 {
 	while (head->next)
 		head = head->next;
 	return (head);
 }
+
+/*******************************************************************************
+ * create a new particle and push it at the end of the linked list             *
+ ******************************************************************************/
 
 void	push_particle(t_data *data, double x, double y, double dx, double dy)
 {
@@ -43,6 +49,10 @@ void	push_particle(t_data *data, double x, double y, double dx, double dy)
 		last_node->next = new_node;
 	}
 }
+
+/*******************************************************************************
+ * delete particles which time to live (ttl) is down to 0                      *
+ ******************************************************************************/
 
 void	clean_particle_lst(t_data *data)
 {

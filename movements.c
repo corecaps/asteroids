@@ -11,7 +11,10 @@
 /* ************************************************************************** */
 
 #include "asteroid.h"
-
+/*******************************************************************************
+ * apply translate on asteroid x,y with vector dx,dy                           *
+ * warp coordinate                                                             *
+ ******************************************************************************/
 void	asteroid_translate(t_asteroid *asteroid, t_data *data)
 {
 	asteroid->x += asteroid->dx * data->elapsed_time;
@@ -24,8 +27,12 @@ void	asteroid_translate(t_asteroid *asteroid, t_data *data)
 		asteroid->y -= SIZE_Y;
 	if (asteroid->y < 0)
 		asteroid->y = asteroid->y + SIZE_Y;
-//	printf("[%f,%f] + [%f,%f]\n",asteroid->x,asteroid->y,asteroid->dx,asteroid->dy);
 }
+
+/*******************************************************************************
+ * go through the asteroids linked list to apply translation with              *
+ * asteroid_translate()                                                        *
+ ******************************************************************************/
 
 void	asteroid_move(t_data *data)
 {
@@ -38,12 +45,20 @@ void	asteroid_move(t_data *data)
 	}
 }
 
+/*******************************************************************************
+ * apply translate to player x,y via vector dx,dy & warp coordinates           *
+ ******************************************************************************/
+
 void	player_move(t_data *data)
 {
 	data->player->x += data->player->dx;
 	data->player->y += data->player->dy;
 	warp_coord_double(&data->player->x,&data->player->y);
 }
+
+/*******************************************************************************
+ * apply translate to every particles in particles_lst                         *
+ ******************************************************************************/
 
 void	partile_move(t_data *data)
 {
