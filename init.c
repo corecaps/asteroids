@@ -63,7 +63,8 @@ void init_player(t_data *data)
 	data->player->y = (double)SIZE_Y / 2;
 	data->player->dx = 0.0;
 	data->player->dy = 0.0;
-	data->player->velocity = 0.0f;
+	data->player->alive = 1;
+	data->player->score = 0;
 	data->player->angle = 0.0f;
 }
 
@@ -77,7 +78,7 @@ void set_data(t_data *data)
 	data->size_y = SIZE_Y;
 	data->asteroid_lst = NULL;
 	for (int n=0;n < 10;n++)
-		pop_asteroid(data, rand()%50 + 5, get_rnd_delta(), get_rnd_delta());
+		push_asteroid(data, rand() % 50 + 5, get_rnd_delta(), get_rnd_delta());
 	clock_gettime(CLOCK_MONOTONIC, &data->last_frame);
 	init_player(data);
 }

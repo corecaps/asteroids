@@ -19,14 +19,21 @@ int key_pressed(int keycode, t_data *data)
 		mlx_destroy_window(data->mlx, data->mlx_win);
 	if (keycode == 119 || keycode == 65362)
 	{
-		data->player->dx +=
-				sin(abs(data->player->angle) * RADIAN) * 20.0f * data->elapsed_time;
-		data->player->dy += -cos(abs(data->player->angle)* RADIAN) * 20.0f * data->elapsed_time;
+		data->player->dx +=	sin(data->player->angle * RADIAN)
+				* 20.0f * data->elapsed_time;
+		data->player->dy += -cos(data->player->angle * RADIAN)
+				* 20.0f * data->elapsed_time;
+		for(int n = 0; n < 2;n += 1)
+		{
+			push_particle(data, data->player->x + n, data->player->y + n,
+						  -data->player->dx, -data->player->dy);
+			push_particle(data, data->player->x - n, data->player->y - n,
+						  -data->player->dx, -data->player->dy);
+		}
 	}
-	if (keycode == 115 || keycode == 65364)
+	if (keycode == 32)
 	{
-		data->player->dx -= sin(data->player->angle* RADIAN) * 20.0f * data->elapsed_time;
-		data->player->dy -= -cos(data->player->angle * RADIAN) * 20.0f * data->elapsed_time;
+		printf("fire !!\n");
 	}
 
 	if (keycode == 97 || keycode == 65361)
@@ -273,4 +280,21 @@ void	draw_player(t_data *data)
 			  (int)round(pt_array[2].x),
 			  (int)round(pt_array[2].y),
 			  data,0xffffff);
+}
+
+void	draw_particle_lst(t_data *data)
+{
+	t_particle_lst *node = data->particle_lst;
+
+	if (node == NULL)
+		return ;
+	while (node)
+	{
+		if (node->particle->ttl > 0)
+		{
+			node->particle->ttl --;
+			my_mlx_pixel_put(data->img_buffer,(int)round(node->particle->x),(int)round(node->particle->y),0xFF0000);
+		}
+		node = node->next;
+	}
 }

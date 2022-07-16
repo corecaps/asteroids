@@ -26,6 +26,19 @@ typedef struct s_point
 	double x;
 	double y;
 } t_point;
+typedef struct s_particle
+{
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	int 	ttl;
+} t_particle;
+typedef struct s_particle_lst
+{
+	t_particle	*particle;
+	struct s_particle_lst *next;
+} t_particle_lst;
 typedef struct s_buffer
 {
 	void	*img;
@@ -55,8 +68,9 @@ typedef struct	s_player
 	double 	y;
 	double 	dx;
 	double	dy;
-	double angle;
-	double	velocity;
+	double	angle;
+	int		alive;
+	int		score;
 } t_player;
 
 typedef struct	s_data
@@ -70,17 +84,18 @@ typedef struct	s_data
 	t_buffer		*img_buffer;
 	t_asteroid_lst	*asteroid_lst;
 	t_player 		*player;
+	t_particle_lst	*particle_lst;
 } t_data;
 int 	key_pressed(int keycode, t_data *data);
 int		my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
 void 	warp_coord(int *x, int *y);
-void warp_coord_double(double *x, double *y);
+void	warp_coord_double(double *x, double *y);
 void 	draw_line(int x_from,int y_from,int x_to,int y_to,t_data *data, int color);
 void	clear_buffer(t_data *data);
 void	draw_player(t_data *data);
 int 	render(t_data *data);
-t_data *main_init(void);
-void	pop_asteroid(t_data *data, int size, double dx, double dy);
+t_data	*main_init(void);
+void	push_asteroid(t_data *data, int size, double dx, double dy);
 void	draw_lst_asteroid(t_data *data);
 void	draw_asteroid(t_data *data, t_asteroid *asteroid, double angle_offset);
 void	main_memory_clean(t_data *data);
@@ -89,6 +104,11 @@ void	asteroid_move(t_data *data);
 void	player_move(t_data *data);
 void	get_elapsed_time(t_data *data);
 double	get_rnd_delta();
+t_particle_lst *particle_last(t_particle_lst *head);
+void	clean_particle_lst(t_data *data);
+void	push_particle(t_data *data, double x, double y, double dx, double dy);
+void	partile_move(t_data *data);
+void	draw_particle_lst(t_data *data);
 // test functions :
 void 	test_line(t_data *data);
 void	test_line2(t_data *data);

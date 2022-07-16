@@ -56,7 +56,7 @@ void init_asteroid(int size, t_asteroid_lst *asteroid_node, double dx, double dy
  * Create a new asteroid and put it @ the end of the linked list               *
  ******************************************************************************/
 
-void pop_asteroid(t_data *data, int size, double dx, double dy)
+void push_asteroid(t_data *data, int size, double dx, double dy)
 {
 	t_asteroid_lst 	*new_node;
 	t_asteroid_lst	*last_node;

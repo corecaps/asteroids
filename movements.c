@@ -44,3 +44,18 @@ void	player_move(t_data *data)
 	data->player->y += data->player->dy;
 	warp_coord_double(&data->player->x,&data->player->y);
 }
+
+void	partile_move(t_data *data)
+{
+	t_particle_lst *node = data->particle_lst;
+	while (node)
+	{
+		if (node != NULL && node->particle != NULL)
+		{
+			node->particle->x += node->particle->dx;
+			node->particle->y += node->particle->dy;
+			warp_coord_double(&node->particle->x, &node->particle->y);
+		}
+		node = node->next;
+	}
+}
