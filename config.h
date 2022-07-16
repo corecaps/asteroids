@@ -17,4 +17,7 @@
 # define FRAME_MAX 4
 # define PLAYER_SIZE 20
 # define PARTICLE_TTL 90;
+# define ASTEROID_SIZE_1 60
+# define ASTEROID_SIZE_2 30
+# define ASTEROID_SIZE_3 15
 #endif //ASTEROIDS_CONFIG_H

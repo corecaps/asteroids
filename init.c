@@ -78,8 +78,9 @@ void set_data(t_data *data)
 	data->size_y = SIZE_Y;
 	data->asteroid_lst = NULL;
 	data->particle_lst = NULL;
-	for (int n=0;n < 10;n++)
-		push_asteroid(data, rand() % 50 + 5, get_rnd_delta(), get_rnd_delta());
+	data->level = 1;
+	for (int n=0;n < data->level;n++)
+		push_asteroid(data, ASTEROID_SIZE_1, get_rnd_delta(), get_rnd_delta());
 	clock_gettime(CLOCK_MONOTONIC, &data->last_frame);
 	init_player(data);
 }

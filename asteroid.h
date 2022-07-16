@@ -85,6 +85,7 @@ typedef struct	s_data
 	t_asteroid_lst	*asteroid_lst;
 	t_player 		*player;
 	t_particle_lst	*particle_lst;
+	int 			level;
 } t_data;
 int 	key_pressed(int keycode, t_data *data);
 int		my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
