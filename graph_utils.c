@@ -255,10 +255,10 @@ void	draw_player(t_data *data)
 
 	pt_array[0].x = x +	(PLAYER_SIZE * sin((angle)* RADIAN));
 	pt_array[0].y = y +	(PLAYER_SIZE * -cos((angle)* RADIAN));
-	pt_array[1].x = x +	((PLAYER_SIZE / 2) * sin(((angle - 120))* RADIAN));
-	pt_array[1].y = y +	((PLAYER_SIZE / 2) * -cos(((angle - 120))* RADIAN));
-	pt_array[2].x = x +	((PLAYER_SIZE / 2) * sin(((angle + 120))* RADIAN));
-	pt_array[2].y = y +	((PLAYER_SIZE / 2) * -cos(((angle + 120))* RADIAN));
+	pt_array[1].x = x +	(((double)PLAYER_SIZE / 2) * sin(((angle - 120))* RADIAN));
+	pt_array[1].y = y +	(((double)PLAYER_SIZE / 2) * -cos(((angle - 120))* RADIAN));
+	pt_array[2].x = x +	(((double)PLAYER_SIZE / 2) * sin(((angle + 120))* RADIAN));
+	pt_array[2].y = y +	(((double)PLAYER_SIZE / 2) * -cos(((angle + 120))* RADIAN));
 
 	draw_line((int)round(pt_array[0].x),
 			  (int)round(pt_array[0].y),

@@ -25,7 +25,6 @@ int render(t_data *data)
 		clear_buffer(data);
 		clean_particle_lst(data);
 		//TODO clean_bullet_lst
-		//TODO clean_particle_lst
 		frame ++;
 	}
 	else if (frame == 1)
@@ -34,9 +33,7 @@ int render(t_data *data)
 		asteroid_move(data);
 		player_move(data);
 		partile_move(data);
-		// TODO player_move(data);
 		// TODO bullet_move(data);
-		// TODO particle_move(data);
 		// TODO collision(data);
 		frame ++;
 	}
@@ -45,9 +42,7 @@ int render(t_data *data)
 		draw_lst_asteroid(data);
 		draw_player(data);
 		draw_particle_lst(data);
-		// TODO draw_player
 		// TODO draw_bullets
-		// TODO draw_particle
 		frame ++;
 	}
 	else if (frame >= FRAME_MAX)
