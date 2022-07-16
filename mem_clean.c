@@ -22,6 +22,7 @@ void main_memory_clean(t_data *data)
 	t_asteroid_lst *ast_tmp = NULL;
 	t_particle_lst *part_node = data->particle_lst;
 	t_particle_lst *part_tmp = NULL;
+
 	mlx_destroy_image(data->mlx,data->img_buffer->img);
 	free(data->player);
 	if (ast_node != NULL)
