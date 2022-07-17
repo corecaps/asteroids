@@ -32,7 +32,7 @@ int render(t_data *data)
 		get_elapsed_time(data);
 		asteroid_move(data);
 		player_move(data);
-		partile_move(data);
+		particle_move(data);
 		// TODO bullet_move(data);
 		// TODO collision(data);
 		frame ++;

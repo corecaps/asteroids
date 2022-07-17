@@ -60,7 +60,7 @@ void	player_move(t_data *data)
  * apply translate to every particles in particles_lst                         *
  ******************************************************************************/
 
-void	partile_move(t_data *data)
+void	particle_move(t_data *data)
 {
 	t_particle_lst *node = data->particle_lst;
 	while (node)

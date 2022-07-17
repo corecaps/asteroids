@@ -92,14 +92,14 @@ void warp_coord(int *x, int *y)
 
 void warp_coord_double(double *x, double *y)
 {
-	if ((*x) < 0.0)
-		(*x) = SIZE_X -(*x) - 1;
 	if ((*x) > (double)SIZE_X)
-		(*x) = (*x) - SIZE_X - 1;
-	if ((*y) < 0.0)
-		(*y) = SIZE_Y -(*y) - 1;
+		(*x) -= (double)SIZE_X;
+	if ((*x) < 0)
+		(*x) = (*x) + (double)SIZE_X;
 	if ((*y) > (double)SIZE_Y)
-		(*y) = (*y) - SIZE_Y - 1;
+		(*y) -= (double)SIZE_Y;
+	if ((*y) < 0)
+		(*y) = (*y) + (double)SIZE_Y;
 }
 
 /*******************************************************************************
@@ -220,9 +220,9 @@ void draw_asteroid(t_data *data, t_asteroid *asteroid, double angle_offset)
 	{
 		pt_array[i].x =
 				asteroid->x +
-				(((size / 2) + offset[i]) * sin(((i * 36)+ angle_offset)* RADIAN));
+				((((double)size / 2) + offset[i]) * sin(((i * 36)+ angle_offset)* RADIAN));
 		pt_array[i].y = asteroid->y +
-						(((size / 2) + offset[i]) * cos(((i * 36)+angle_offset) * RADIAN));
+						((((double)size / 2) + offset[i]) * cos(((i * 36)+angle_offset) * RADIAN));
 	}
 	for (int i = 1; i < 10; i ++)
 	{
