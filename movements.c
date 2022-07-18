@@ -74,3 +74,18 @@ void	particle_move(t_data *data)
 		node = node->next;
 	}
 }
+
+void	bullet_move(t_data *data)
+{
+	t_bullet_lst *node = data->bullet_lst;
+	while (node)
+	{
+		if (node != NULL && node->bullet != NULL)
+		{
+			node->bullet->x += node->bullet->dx;
+			node->bullet->y += node->bullet->dy;
+			warp_coord_double(&node->bullet->x, &node->bullet->y);
+		}
+		node = node->next;
+	}
+}

@@ -19,7 +19,7 @@ INC = -Iminilibx-linux/
 LINK = -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lz
 
 SRC = main.c init.c graph_utils.c render.c asteroids.c mem_clean.c movements.c \
-	tests.c particles.c
+	tests.c particles.c bullets.c
 
 OBJ = $(SRC:.c=.o)
 

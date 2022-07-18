@@ -26,6 +26,19 @@ typedef struct s_point
 	double x;
 	double y;
 } t_point;
+typedef struct s_bullet
+{
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	int 	ttl;
+} t_bullet;
+typedef struct s_bullet_lst
+{
+	t_bullet 	*bullet;
+	struct s_bullet_lst *next;
+} t_bullet_lst;
 typedef struct s_particle
 {
 	double	x;
@@ -85,6 +98,7 @@ typedef struct	s_data
 	t_asteroid_lst	*asteroid_lst;
 	t_player 		*player;
 	t_particle_lst	*particle_lst;
+	t_bullet_lst	*bullet_lst;
 	int 			level;
 } t_data;
 int 			key_pressed(int keycode, t_data *data);
@@ -105,6 +119,10 @@ void			asteroid_move(t_data *data);
 void			player_move(t_data *data);
 void			get_elapsed_time(t_data *data);
 double			get_rnd_delta();
+void			push_bullet(t_data *data, double x, double y, double dx, double dy);
+void			clean_bullet_lst(t_data *data);
+void			draw_bullet_lst(t_data *data);
+void			bullet_move(t_data *data);
 t_particle_lst	*particle_last(t_particle_lst *head);
 void			clean_particle_lst(t_data *data);
 void			push_particle(t_data *data, double x, double y, double dx, double dy);

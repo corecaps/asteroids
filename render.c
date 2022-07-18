@@ -33,6 +33,7 @@ int render(t_data *data)
 		asteroid_move(data);
 		player_move(data);
 		particle_move(data);
+		bullet_move(data);
 		// TODO bullet_move(data);
 		// TODO collision(data);
 		frame ++;
@@ -42,6 +43,7 @@ int render(t_data *data)
 		draw_lst_asteroid(data);
 		draw_player(data);
 		draw_particle_lst(data);
+		draw_bullet_lst(data);
 		// TODO draw_bullets
 		frame ++;
 	}

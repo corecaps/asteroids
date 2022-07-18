@@ -38,7 +38,12 @@ int key_pressed(int keycode, t_data *data)
 	}
 	if (keycode == 32)
 	{
-		printf("fire !!\n");
+		push_bullet(data,data->player->x+data->player->dx,
+					data->player->y+data->player->dy,
+					sin(data->player->angle * RADIAN)
+					* 2.0f,
+					-cos(data->player->angle * RADIAN)
+					* 2.0f);
 	}
 
 	if (keycode == 97 || keycode == 65361)
@@ -317,6 +322,38 @@ void	draw_particle_lst(t_data *data)
 							 (int)round(node->particle->x),
 							 (int)round(node->particle->y),
 							 0xFF0000);
+		}
+		node = node->next;
+	}
+}
+
+void	draw_bullet_lst(t_data *data)
+{
+	t_bullet_lst *node = data->bullet_lst;
+
+	if (node == NULL)
+		return ;
+	while (node)
+	{
+		if (node->bullet->ttl > 0)
+		{
+			node->bullet->ttl --;
+			my_mlx_pixel_put(data->img_buffer,
+							 (int)round(node->bullet->x),
+							 (int)round(node->bullet->y),
+							 0xFFA500);
+			my_mlx_pixel_put(data->img_buffer,
+							 (int)round(node->bullet->x+1),
+							 (int)round(node->bullet->y+1),
+							 0xFFA500);
+			my_mlx_pixel_put(data->img_buffer,
+							 (int)round(node->bullet->x),
+							 (int)round(node->bullet->y+1),
+							 0xFFA500);
+			my_mlx_pixel_put(data->img_buffer,
+							 (int)round(node->bullet->x+1),
+							 (int)round(node->bullet->y),
+							 0xFFA500);
 		}
 		node = node->next;
 	}
