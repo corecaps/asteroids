@@ -24,7 +24,7 @@ int render(t_data *data)
 	{
 		clear_buffer(data);
 		clean_particle_lst(data);
-		//TODO clean_bullet_lst
+		clean_bullet_lst(data);
 		frame ++;
 	}
 	else if (frame == 1)
@@ -34,8 +34,7 @@ int render(t_data *data)
 		player_move(data);
 		particle_move(data);
 		bullet_move(data);
-		// TODO bullet_move(data);
-		// TODO collision(data);
+		collision_detection(data);
 		frame ++;
 	}
 	else if (frame == 2)
@@ -44,7 +43,6 @@ int render(t_data *data)
 		draw_player(data);
 		draw_particle_lst(data);
 		draw_bullet_lst(data);
-		// TODO draw_bullets
 		frame ++;
 	}
 	else if (frame >= FRAME_MAX)

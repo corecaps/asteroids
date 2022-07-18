@@ -122,6 +122,7 @@ double			get_rnd_delta();
 void			push_bullet(t_data *data, double x, double y, double dx, double dy);
 void			clean_bullet_lst(t_data *data);
 void			draw_bullet_lst(t_data *data);
+void			collision_detection(t_data *data);
 void			bullet_move(t_data *data);
 t_particle_lst	*particle_last(t_particle_lst *head);
 void			clean_particle_lst(t_data *data);

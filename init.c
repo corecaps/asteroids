@@ -78,6 +78,7 @@ void set_data(t_data *data)
 	data->size_y = SIZE_Y;
 	data->asteroid_lst = NULL;
 	data->particle_lst = NULL;
+	data->bullet_lst = NULL;
 	data->level = 1;
 	for (int n=0;n < data->level;n++)
 		push_asteroid(data, ASTEROID_SIZE_1, get_rnd_delta(), get_rnd_delta());
