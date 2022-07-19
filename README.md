@@ -2,7 +2,7 @@
 
 Simple implementation of the classic arcarde game Asteroids in pure C using [Minilibx](https://github.com/42Paris/minilibx-linux) as a side project during my 42 school cursus.
 
-![screenshot.png]
+![./screenshot.png]
 
 ## Dependencies
 - Minilibx linux 
