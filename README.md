@@ -13,8 +13,11 @@ Simple implementation of the classic arcarde game Asteroids in pure C using [Min
 ## Compilation 
 if you satisfy dependencies just type :
 > make 
-the binarie should be named asteroid, just type to launch : 
+
+the binari should be named asteroid, just type to launch : 
+
 > ./asteroid
+
 ## Concepts used 
 
 - the engine uses [Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) to draw line.
