@@ -101,6 +101,7 @@ typedef struct	s_data
 	t_bullet_lst	*bullet_lst;
 	int 			level;
 } t_data;
+void 			push_asteroid(t_data *data, int size, double dx, double dy,double x, double y);
 int 			key_pressed(int keycode, t_data *data);
 int				my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
 void 			warp_coord(int *x, int *y);
@@ -110,7 +111,6 @@ void			clear_buffer(t_data *data);
 void			draw_player(t_data *data);
 int 			render(t_data *data);
 t_data			*main_init(void);
-void			push_asteroid(t_data *data, int size, double dx, double dy);
 void			draw_lst_asteroid(t_data *data);
 void			draw_asteroid(t_data *data, t_asteroid *asteroid, double angle_offset);
 void			main_memory_clean(t_data *data);
@@ -129,6 +129,7 @@ void			clean_particle_lst(t_data *data);
 void			push_particle(t_data *data, double x, double y, double dx, double dy);
 void			particle_move(t_data *data);
 void			draw_particle_lst(t_data *data);
+void 			kill_asteroid(t_data *data,t_asteroid_lst *asteroid_node);
 // test functions :
 void 	test_line(t_data *data);
 void	test_line2(t_data *data);

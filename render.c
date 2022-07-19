@@ -12,11 +12,33 @@
 
 #include "asteroid.h"
 
+void play(t_data *data);
+
 /*******************************************************************************
  * Render (data) is hooked to the refresh loop                                 *
  ******************************************************************************/
 
 int render(t_data *data)
+{
+	if(data->player->alive > 0)
+		play(data);
+	else
+	{
+		clear_buffer(data);
+		mlx_put_image_to_window(data->mlx,
+								data->mlx_win,
+								data->img_buffer->img,
+								0 ,0);
+		mlx_string_put(data->mlx,
+					   data->mlx_win,
+					   SIZE_X / 2,
+					   SIZE_Y / 2,0xFFFFFF,
+					   "GAME OVER");
+	}
+	return (0);
+}
+
+void play(t_data *data)
 {
 	static int frame = 0;
 
@@ -62,7 +84,6 @@ int render(t_data *data)
 	{
 		frame ++;
 	}
-	return (0);
 }
 
 /*******************************************************************************
