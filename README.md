@@ -14,7 +14,7 @@ Simple implementation of the classic arcarde game Asteroids in pure C using [Min
 if you satisfy dependencies just type :
 > make 
 
-the binari should be named asteroid, just type to launch : 
+the binary should be named asteroid, just type to launch : 
 
 > ./asteroid
 
