@@ -102,6 +102,7 @@ typedef struct	s_data
 	int 			level;
 } t_data;
 void 			push_asteroid(t_data *data, int size, double dx, double dy,double x, double y);
+void			init_level(t_data *data);
 int 			key_pressed(int keycode, t_data *data);
 int				my_mlx_pixel_put(t_buffer *data, int x, int y, int color);
 void 			warp_coord(int *x, int *y);

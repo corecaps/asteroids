@@ -12,6 +12,8 @@
 
 #include "asteroid.h"
 
+void init_level(t_data *data);
+
 /*******************************************************************************
  * allocate space on the heap for the game basic data structures               *
  * in case of error a message is printed and exit(-1) is called                *
@@ -80,13 +82,18 @@ void set_data(t_data *data)
 	data->particle_lst = NULL;
 	data->bullet_lst = NULL;
 	data->level = 1;
-	for (int n=0;n < data->level;n++)
+	init_level(data);
+	clock_gettime(CLOCK_MONOTONIC, &data->last_frame);
+	init_player(data);
+}
+
+void init_level(t_data *data)
+{
+	for (int n=0; n < data->level; n++)
 		push_asteroid(data, ASTEROID_SIZE_1, get_rnd_delta(),
 					  get_rnd_delta(),
 					  rand() % (SIZE_X - ASTEROID_SIZE_1),
 					  rand() % (SIZE_Y - ASTEROID_SIZE_1));
-	clock_gettime(CLOCK_MONOTONIC, &data->last_frame);
-	init_player(data);
 }
 
 /*******************************************************************************

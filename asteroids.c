@@ -97,12 +97,12 @@ void kill_asteroid(t_data *data,t_asteroid_lst *asteroid_node)
 		create = 1;
 	}
 	if (asteroid_node->asteroid->size >= ASTEROID_SIZE_1)
-		data->player->score += 250;
+		data->player->score += 250 * data->level;
 	else if (asteroid_node->asteroid->size <= ASTEROID_SIZE_2 &&
 	asteroid_node->asteroid->size > ASTEROID_SIZE_3)
-		data->player->score += 500;
+		data->player->score += 500 * data->level;
 	else if (asteroid_node->asteroid->size <= ASTEROID_SIZE_1)
-		data->player->score += 1000;
+		data->player->score += 1000 * data->level;
 	if (data->asteroid_lst != asteroid_node)
 		free(asteroid_node);
 	else
@@ -110,11 +110,11 @@ void kill_asteroid(t_data *data,t_asteroid_lst *asteroid_node)
 	if (create)
 	{
 		push_asteroid(data, (int)round(size),
-					  -dx,
+					  -dx * 1.50,
 					  dy,x,y);
 		push_asteroid(data, (int)round(size),
 					  dx,
-					  -dy,x,y);
+					  -dy * 1.50,x,y);
 
 	}
 }

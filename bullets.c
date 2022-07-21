@@ -64,7 +64,7 @@ void	push_bullet(t_data *data, double x, double y, double dx, double dy)
 
 void	clean_bullet_lst(t_data *data)
 {
-	t_bullet_lst *node = data->particle_lst;
+	t_bullet_lst *node = data->bullet_lst;
 	t_bullet_lst *prev_node = NULL;
 	t_bullet_lst *del_node = NULL;
 

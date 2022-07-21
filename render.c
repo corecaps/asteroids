@@ -47,6 +47,11 @@ void play(t_data *data)
 		clear_buffer(data);
 		clean_particle_lst(data);
 		clean_bullet_lst(data);
+		if (data->asteroid_lst == NULL)
+		{
+			data->level ++;
+			init_level(data);
+		}
 		frame ++;
 	}
 	else if (frame == 1)
